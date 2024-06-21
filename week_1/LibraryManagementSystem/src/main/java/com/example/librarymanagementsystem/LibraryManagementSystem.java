@@ -41,9 +41,15 @@ public class LibraryManagementSystem extends Application {
         });
 
         btnManageBooks.setOnAction(e -> {
-            BookManagement bookManagementManagement = new BookManagement();
+            BookManagement bookManagement = new BookManagement();
             centerContent.getChildren().clear();
-            centerContent.getChildren().add(bookManagementManagement.getBookManagementPane());
+            centerContent.getChildren().add(bookManagement.getBookManagementPane());
+        });
+
+        btnManageTransactions.setOnAction(e -> {
+            TransactionManagement transactionManagement = new TransactionManagement();
+            centerContent.getChildren().clear();
+            centerContent.getChildren().add(transactionManagement.getTransactionManagementPane());
         });
     }
 

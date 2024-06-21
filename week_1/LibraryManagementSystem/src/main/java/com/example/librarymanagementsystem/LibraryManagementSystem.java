@@ -39,6 +39,12 @@ public class LibraryManagementSystem extends Application {
             centerContent.getChildren().clear();
             centerContent.getChildren().add(userManagement.getUserManagementPane());
         });
+
+        btnManageBooks.setOnAction(e -> {
+            BookManagement bookManagementManagement = new BookManagement();
+            centerContent.getChildren().clear();
+            centerContent.getChildren().add(bookManagementManagement.getBookManagementPane());
+        });
     }
 
     public static void main(String[] args) {

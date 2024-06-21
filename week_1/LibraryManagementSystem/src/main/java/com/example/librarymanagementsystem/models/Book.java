@@ -1,40 +1,51 @@
 package com.example.librarymanagementsystem.models;
 
-public class Book {
-    private int bookID;
-    private String title;
-    private String author;
-    private String genre;
+import javafx.beans.property.*;
 
-    public Book(int bookID, String title, String author, String genre) {
-        this.bookID = bookID;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
+public class Book {
+    private final IntegerProperty bookID;
+    private final StringProperty title;
+    private final StringProperty author;
+
+    public Book(int id, String title, String author) {
+        this.bookID = new SimpleIntegerProperty(id);
+        this.title = new SimpleStringProperty(title);
+        this.author = new SimpleStringProperty(author);
     }
-    
+
     public int getBookID() {
+        return bookID.get();
+    }
+
+    public IntegerProperty idProperty() {
         return bookID;
     }
-    public void setBookID(int bookID) {
-        this.bookID = bookID;
+
+    public void setId(int id) {
+        this.bookID.set(id);
     }
+
     public String getTitle() {
+        return title.get();
+    }
+
+    public StringProperty titleProperty() {
         return title;
     }
+
     public void setTitle(String title) {
-        this.title = title;
+        this.title.set(title);
     }
+
     public String getAuthor() {
+        return author.get();
+    }
+
+    public StringProperty authorProperty() {
         return author;
     }
+
     public void setAuthor(String author) {
-        this.author = author;
-    }
-    public String getGenre() {
-        return genre;
-    }
-    public void setGenre(String genre) {
-        this.genre = genre;
+        this.author.set(author);
     }
 }

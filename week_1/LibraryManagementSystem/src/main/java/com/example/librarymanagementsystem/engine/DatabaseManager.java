@@ -60,12 +60,11 @@ public class DatabaseManager {
 
     // Method to insert a book
     public void insertBook(Book book) {
-        String sql = "INSERT INTO Books (Title, Author, Genre) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Books (Title, Author) VALUES (?, ?)";
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, book.getTitle());
             pstmt.setString(2, book.getAuthor());
-            pstmt.setString(3, book.getGenre());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

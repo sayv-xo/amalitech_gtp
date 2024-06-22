@@ -48,4 +48,9 @@ public class Book {
     public void setAuthor(String author) {
         this.author.set(author);
     }
+
+    @Override
+    public String toString() {
+        return title.get();
+    }
 }

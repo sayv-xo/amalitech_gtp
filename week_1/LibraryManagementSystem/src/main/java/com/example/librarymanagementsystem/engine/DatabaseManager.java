@@ -116,72 +116,6 @@ public class DatabaseManager {
         return books;
     }
 
-    // Method to borrow a book
-    public void borrowBook(int userID, int bookID, Date borrowDate, Date dueDate) {
-        String sql = "INSERT INTO Transactions (UserID, BookID, BorrowDate, DueDate) VALUES (?, ?, ?, ?)";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, userID);
-            pstmt.setInt(2, bookID);
-            pstmt.setDate(3, new java.sql.Date(borrowDate.getTime()));
-            pstmt.setDate(4, new java.sql.Date(dueDate.getTime()));
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    // Method to return a book
-    public void returnBook(int transactionID, Date returnDate) {
-        String sql = "UPDATE Transactions SET ReturnDate = ? WHERE TransactionID = ?";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setDate(1, new java.sql.Date(returnDate.getTime()));
-            pstmt.setInt(2, transactionID);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    // Method to view borrowed books
-    public void viewBorrowedBooks() {
-        String sql = "SELECT * FROM Transactions WHERE ReturnDate IS NULL";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-            while (rs.next()) {
-                System.out.println("TransactionID: " + rs.getInt("TransactionID"));
-                System.out.println("UserID: " + rs.getInt("UserID"));
-                System.out.println("BookID: " + rs.getInt("BookID"));
-                System.out.println("BorrowDate: " + rs.getDate("BorrowDate"));
-                System.out.println("DueDate: " + rs.getDate("DueDate"));
-                System.out.println();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    // Method to view returned books
-    public void viewReturnedBooks() {
-        String sql = "SELECT * FROM Transactions WHERE ReturnDate IS NOT NULL";
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-            while (rs.next()) {
-                System.out.println("TransactionID: " + rs.getInt("TransactionID"));
-                System.out.println("UserID: " + rs.getInt("UserID"));
-                System.out.println("BookID: " + rs.getInt("BookID"));
-                System.out.println("BorrowDate: " + rs.getDate("BorrowDate"));
-                System.out.println("ReturnDate: " + rs.getDate("ReturnDate"));
-                System.out.println("DueDate: " + rs.getDate("DueDate"));
-                System.out.println();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     // Method to add a borrowed book
     public void insertTransaction(Transaction transaction) {
@@ -192,18 +126,6 @@ public class DatabaseManager {
             pstmt.setString(2, transaction.getTitle());
             pstmt.setDate(3, Date.valueOf(transaction.getBorrowDate()));
             pstmt.setDate(4, transaction.getReturnDate() != null ? Date.valueOf(transaction.getReturnDate()) : null);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateTransactionReturnDate(int transactionId, LocalDate returnDate) {
-        String query = "UPDATE Transactions SET ReturnDate = ? WHERE ID = ?";
-        try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setDate(1, Date.valueOf(returnDate));
-            pstmt.setInt(2, transactionId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,5 +1,8 @@
 package com.example.librarymanagementsystem;
 
+import com.example.librarymanagementsystem.management.BookManagement;
+import com.example.librarymanagementsystem.management.TransactionManagement;
+import com.example.librarymanagementsystem.management.UserManagement;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -37,19 +40,19 @@ public class LibraryManagementSystem extends Application {
         btnManageUsers.setOnAction(e -> {
             UserManagement userManagement = new UserManagement();
             centerContent.getChildren().clear();
-            centerContent.getChildren().add(userManagement.getUserManagementPane());
+            centerContent.getChildren().add(userManagement.getManagementPane());
         });
 
         btnManageBooks.setOnAction(e -> {
             BookManagement bookManagement = new BookManagement();
             centerContent.getChildren().clear();
-            centerContent.getChildren().add(bookManagement.getBookManagementPane());
+            centerContent.getChildren().add(bookManagement.getManagementPane());
         });
 
         btnManageTransactions.setOnAction(e -> {
             TransactionManagement transactionManagement = new TransactionManagement();
             centerContent.getChildren().clear();
-            centerContent.getChildren().add(transactionManagement.getTransactionManagementPane());
+            centerContent.getChildren().add(transactionManagement.getManagementPane());
         });
     }
 

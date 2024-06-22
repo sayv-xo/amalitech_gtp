@@ -49,4 +49,8 @@ public class User {
         this.email.set(email);
     }
 
+    @Override
+    public String toString() {
+        return name.get();
+    }
 }

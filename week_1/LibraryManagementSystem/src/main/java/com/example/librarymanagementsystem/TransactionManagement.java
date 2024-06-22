@@ -86,10 +86,14 @@ public class TransactionManagement {
             if (selectedUser == null || selectedBook == null || borrowDate == null || returnDate == null) {
                 showAlert("Incomplete Data", "Please fill in all fields.");
             } else {
-                // Call method to add transaction to database
-                DatabaseManager dbManager = new DatabaseManager();
-                dbManager.insertTransaction(new Transaction(0, selectedUser.getName(), selectedBook.getTitle(), borrowDate, returnDate));
-                loadTransactions(); // Refresh transaction list
+                if (isBookAlreadyBorrowed(selectedUser, selectedBook)) {
+                    showAlert("Duplicate Borrow", "User has already borrowed that book.");
+                } else {
+                    // Call method to add transaction to database
+                    DatabaseManager dbManager = new DatabaseManager();
+                    dbManager.insertTransaction(new Transaction(0, selectedUser.getName(), selectedBook.getTitle(), borrowDate, returnDate));
+                    loadTransactions(); // Refresh transaction list
+                }
             }
         });
 
@@ -106,6 +110,16 @@ public class TransactionManagement {
         });
 
         return transactionManagementPane;
+    }
+
+    //Check if book is already borrowed
+    private boolean isBookAlreadyBorrowed(User user, Book book) {
+        for (Transaction transaction : transactionData) {
+            if (transaction.getName().equals(user.getName()) && transaction.getTitle().equals(book.getTitle())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void loadTransactions() {

@@ -1,69 +1,82 @@
 package com.example.librarymanagementsystem.models;
 
-import java.util.Date;
+import javafx.beans.property.*;
+
+import java.time.LocalDate;
 
 public class Transaction {
-    private int transactionID;
-    private int userID;
-    private int bookID;
-    private Date borrowDate;
-    private Date returnDate;
-    private Date dueDate;
-    
-    public Transaction(int transactionID, int userID, int bookID, Date borrowDate, Date returnDate, Date dueDate) {
-        this.transactionID = transactionID;
-        this.userID = userID;
-        this.bookID = bookID;
-        this.borrowDate = borrowDate;
-        this.returnDate = returnDate;
-        this.dueDate = dueDate;
+    private final IntegerProperty id;
+    private final StringProperty name;
+    private final StringProperty title;
+    private final ObjectProperty<LocalDate> borrowDate;
+    private final ObjectProperty<LocalDate> returnDate;
+
+
+    public Transaction(int id, String name, String title, LocalDate borrowDate, LocalDate returnDate) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.title = new SimpleStringProperty(title);
+        this.borrowDate = new SimpleObjectProperty<>(borrowDate);
+        this.returnDate = new SimpleObjectProperty<>(returnDate);
     }
 
-    public int getTransactionID() {
-        return transactionID;
+    public int getId() {
+        return id.get();
     }
 
-    public void setTransactionID(int transactionID) {
-        this.transactionID = transactionID;
+    public IntegerProperty idProperty() {
+        return id;
     }
 
-    public int getUserID() {
-        return userID;
+    public void setId(int id) {
+        this.id.set(id);
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public String getName() {
+        return name.get();
     }
 
-    public int getBookID() {
-        return bookID;
+    public StringProperty nameProperty() {
+        return name;
     }
 
-    public void setBookID(int bookID) {
-        this.bookID = bookID;
+    public void setName(String name) {
+        this.name.set(name);
     }
 
-    public Date getBorrowDate() {
+    public String getTitle() {
+        return title.get();
+    }
+
+    public StringProperty titleProperty() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
+
+    public LocalDate getBorrowDate() {
+        return borrowDate.get();
+    }
+
+    public ObjectProperty<LocalDate> borrowDateProperty() {
         return borrowDate;
     }
 
-    public void setBorrowDate(Date borrowDate) {
-        this.borrowDate = borrowDate;
+    public void setBorrowDate(LocalDate borrowDate) {
+        this.borrowDate.set(borrowDate);
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
+        return returnDate.get();
+    }
+
+    public ObjectProperty<LocalDate> returnDateProperty() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate.set(returnDate);
     }
 }

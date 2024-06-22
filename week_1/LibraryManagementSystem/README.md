@@ -48,3 +48,7 @@ The Library Management System is a simple user-friendly app created using JavaFx
 
 # ER Design
 ![EER Diagram of the Database Schema](LMS_EER.png)
+
+# VIdeo Demo
+[Loom Video Link](https://www.loom.com/share/072a76ce9bd14237a447a9fe12dedb2a?sid=a0007db7-bc44-4c6c-867c-ea8f565593d5)
+<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/072a76ce9bd14237a447a9fe12dedb2a?sid=b3874e41-422b-4aea-8b02-ee6b1fb3708c" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>

@@ -1,14 +1,15 @@
 package com.example.librarymanagementsystem.engine;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Date;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.librarymanagementsystem.models.Book;
+import com.example.librarymanagementsystem.models.Transaction;
 import com.example.librarymanagementsystem.models.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class DatabaseManager {
     public Connection connect() {
@@ -83,6 +84,38 @@ public class DatabaseManager {
         }
     }
 
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("UserID");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                users.add(new User(id, name, email));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public List<Book> getAllBooks() {
+        List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM books";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(query); ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("BookID");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                books.add(new Book(id, title, author));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+
     // Method to borrow a book
     public void borrowBook(int userID, int bookID, Date borrowDate, Date dueDate) {
         String sql = "INSERT INTO Transactions (UserID, BookID, BorrowDate, DueDate) VALUES (?, ?, ?, ?)";
@@ -148,5 +181,66 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    // Method to add a borrowed book
+    public void insertTransaction(Transaction transaction) {
+        String query = "INSERT INTO Transactions (Name, Title, BorrowDate, ReturnDate) VALUES (?, ?, ?, ?)";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, transaction.getName());
+            pstmt.setString(2, transaction.getTitle());
+            pstmt.setDate(3, Date.valueOf(transaction.getBorrowDate()));
+            pstmt.setDate(4, transaction.getReturnDate() != null ? Date.valueOf(transaction.getReturnDate()) : null);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTransactionReturnDate(int transactionId, LocalDate returnDate) {
+        String query = "UPDATE Transactions SET ReturnDate = ? WHERE ID = ?";
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setDate(1, Date.valueOf(returnDate));
+            pstmt.setInt(2, transactionId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to remove a borrowed book
+    public void deleteTransaction(int transactionId) {
+        String sql = "DELETE FROM Transactions WHERE TransactionID = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, transactionId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to get all transactions in a table
+    public ObservableList<Transaction> getAllTransactions() {
+        ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+        String query = "SELECT * FROM Transactions";
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                int id = rs.getInt("TransactionID");
+                String name = rs.getString("Name");
+               String title = rs.getString("Title");
+                LocalDate borrowDate = rs.getDate("BorrowDate").toLocalDate();
+                LocalDate returnDate = rs.getDate("ReturnDate") != null ? rs.getDate("ReturnDate").toLocalDate() : null;
+                transactions.add(new Transaction(id, name, title, borrowDate, returnDate));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return transactions;
     }
 }

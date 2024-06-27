@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #cbd5e1;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tps.textprocessingtool.HelloController">
+   <top>
+      <VBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="34.0" prefWidth="139.0" text="Regex Operations" />
+            <Label text="Enter Regex Pattern" />
+            <TextField fx:id="regexInput" promptText="Enter regex here" />
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="26.0" prefWidth="111.0" text="Enter text to process:" />
+            <TextArea fx:id="textInput" maxHeight="100" maxWidth="600.0" minHeight="100" minWidth="600" prefHeight="150.0" prefWidth="600.0" promptText="Enter text here" style="-fx-max-width: 200; -fx-max-height: 500; -fx-background-position: center;" wrapText="true" />
+            <Label text="Enter replacement text (for replace operation):" />
+            <TextField fx:id="replaceInput" prefHeight="23.0" prefWidth="600.0" promptText="Enter replacement text here" />
+            <HBox prefHeight="39.0" prefWidth="600.0" spacing="10">
+               <children>
+                  <Button fx:id="findButton" onAction="#replaceRegex" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: #67e8f9;" text="Find">
+                     <tooltip>
+                        <Tooltip text="Search using regex pattern" />
+                     </tooltip>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="matchButton" onAction="#matchRegex" prefHeight="19.0" prefWidth="142.0" style="-fx-background-color: #34d399;" text="Match">
+                     <tooltip>
+                        <Tooltip text="Check if entire text matches regex pattern" />
+                     </tooltip>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="replaceButton" onAction="#replaceRegex" prefHeight="26.0" prefWidth="103.0" style="-fx-background-color: #ef4444;" text="Replace">
+                     <tooltip>
+                        <Tooltip text="Replace text using regex pattern" />
+                     </tooltip>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Label prefHeight="18.0" prefWidth="158.0" text="Result Field">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="resultInput" editable="false" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

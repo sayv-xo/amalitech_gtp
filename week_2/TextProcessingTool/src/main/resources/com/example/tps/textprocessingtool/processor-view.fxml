@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tps.textprocessingtool.RegexController">
+   <top>
+      <VBox prefHeight="122.0" prefWidth="667.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="37.0" prefWidth="175.0" text="Text Processor">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="471.0" text="Enter Text/Regex Pattern to Find, Match or Replace">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="regexInput" prefHeight="31.0" prefWidth="647.0" promptText="Enter Regular Expression(Pattern) or Text Here">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="15.0" right="5.0" top="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <bottom>
+      <TextArea fx:id="resultInput" editable="false" prefHeight="223.0" prefWidth="667.0" promptText="Result Field" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextArea>
+   </bottom>
+   <center>
+      <VBox prefHeight="331.0" prefWidth="668.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" />
+         </BorderPane.margin>
+         <children>
+            <Label prefHeight="34.0" prefWidth="294.0" text="Input Text To Find or Match">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </Label>
+            <TextArea fx:id="textInput" prefHeight="200.0" prefWidth="200.0" promptText="Input Text Here">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextArea>
+            <TextField fx:id="replaceInput" prefHeight="39.0" prefWidth="600.0" promptText="Input Replacement Text Here">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <HBox prefHeight="36.0" prefWidth="667.0">
+               <children>
+                  <Button fx:id="findButton" mnemonicParsing="false" onAction="#findRegex" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: #67e8f9;" text="Find">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="45.0" right="45.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="matchButton" layoutX="45.0" layoutY="15.0" mnemonicParsing="false" onAction="#matchRegex" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #34d399;" text="Match">
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="45.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="replaceButton" layoutX="122.0" layoutY="10.0" mnemonicParsing="false" onAction="#replaceRegex" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #ef4444;" text="Replace">
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="65.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addToHistory" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #6366f1;" text="Add to History">
+                     <HBox.margin>
+                        <Insets bottom="5.0" right="65.0" top="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#showHistory" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #0d9488;" text="History">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="15.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

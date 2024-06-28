@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.example.tps.textprocessingtool.HistoryController">
+    <ListView fx:id="historyListView" />
+    <Button text="Delete Selected" onAction="#deleteSelected" style="-fx-background-color: #dc2626;">
+        <font>
+            <Font size="14.0" />
+        </font></Button>
+</VBox>

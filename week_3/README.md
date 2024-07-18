@@ -1,7 +1,3 @@
-Here's a comprehensive README file for your sorting application using Spring Framework without Spring Boot:
-
----
-
 # Sorting Algorithms Application
 
 This is a demo application showcasing the use of various sorting algorithms implemented within a Spring MVC web application. The application demonstrates dependency injection, autowiring, inversion of control, and the use of Java-based Spring configurations.

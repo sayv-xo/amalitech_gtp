@@ -22,8 +22,11 @@ public class LibraryManagementSystem extends Application {
 
         // Menu Buttons
         Button btnManageUsers = new Button("Manage Users");
+        btnManageUsers.setId("btnManageUsers");
         Button btnManageBooks = new Button("Manage Books");
+        btnManageBooks.setId("btnManageBooks");
         Button btnManageTransactions = new Button("Manage Transactions");
+        btnManageTransactions.setId("btnManageTransactions");
 
         leftMenu.getChildren().addAll(btnManageUsers, btnManageBooks, btnManageTransactions);
 

@@ -96,4 +96,36 @@ public class LibraryManagementSystemTest {
         verifyThat(".table-view", tableView -> !hasTableCell("Effective Java").matches(tableView));
         verifyThat(".table-view", tableView -> !hasTableCell("Joshua Bloch").matches(tableView));
     }
+
+    @Test
+    public void shouldBorrowBook(FxRobot robot) {
+//        shouldAddUser(robot); // add user
+//        shouldAddBook(robot); // add book
+        robot.clickOn("#btnManageTransactions");
+        robot.clickOn("#userComboBox");
+        robot.clickOn("John Doe");
+        robot.clickOn("#bookComboBox");
+        robot.clickOn("Effective Java");
+        robot.clickOn("#borrowDatePicker").write("25/07/2024");
+        robot.clickOn("#returnDatePicker").write("30/07/2024");
+        robot.clickOn("#borrowButton");
+        verifyThat(".table-view", hasTableCell("John Doe"));
+        verifyThat(".table-view", hasTableCell("Effective Java"));
+    }
+
+    @Test
+    public void shouldReturnBook(FxRobot robot) {
+        robot.clickOn("#btnManageTransactions");
+
+        // Click on Return Book button
+        TableView<?> transTableView = robot.lookup(".table-view").queryAs(TableView.class);
+        int rowIndex = 0; // index of the row to select, adjust if needed
+        robot.interact(() -> transTableView.getSelectionModel().select(rowIndex));
+        robot.clickOn(".table-view .table-row-cell", MouseButton.PRIMARY);
+        robot.clickOn("#returnButton");
+
+        // Verify that the transaction was removed from the table
+        verifyThat(".table-view", tableView -> !hasTableCell("John Doe").matches(tableView));
+        verifyThat(".table-view", tableView -> !hasTableCell("Effective Java").matches(tableView));
+    }
 }

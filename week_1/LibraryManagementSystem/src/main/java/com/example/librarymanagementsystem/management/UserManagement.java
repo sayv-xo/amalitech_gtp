@@ -31,10 +31,14 @@ public class UserManagement extends ManagementBase<User> {
         // Form elements
         TextField nameField = new TextField();
         nameField.setPromptText("Name");
+        nameField.setId("nameField");
         TextField emailField = new TextField();
         emailField.setPromptText("Email");
+        emailField.setId("emailField");
         Button addButton = new Button("Add User");
+        addButton.setId("btnAddUser");
         Button deleteButton = new Button("Delete User");
+        deleteButton.setId("btnDeleteUser");
 
         // Add elements to pane
         userManagementPane.getChildren().addAll(

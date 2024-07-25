@@ -30,10 +30,14 @@ public class BookManagement extends ManagementBase<Book> {
         // Form elements
         TextField titleField = new TextField();
         titleField.setPromptText("Title");
+        titleField.setId("titleField");
         TextField authorField = new TextField();
         authorField.setPromptText("Author");
+        authorField.setId("authorField");
         Button addButton = new Button("Add Book");
+        addButton.setId("addBookButton");
         Button deleteButton = new Button("Delete Book");
+        deleteButton.setId("deleteBookButton");
 
         // Add elements to pane
         bookManagementPane.getChildren().addAll(

@@ -62,4 +62,38 @@ public class LibraryManagementSystemTest {
         verifyThat(".table-view", tableView -> !hasTableCell("john.doe@example.com").matches(tableView));
     }
 
+    @Test
+    public void shouldAddBook(FxRobot robot) {
+        // Navigate to Book Management section
+        robot.clickOn("#btnManageBooks");
+
+        // Enter Book details
+        robot.clickOn("#titleField").write("Effective Java");
+        robot.clickOn("#authorField").write("Joshua Bloch");
+
+        // Click on Add Book button
+        robot.clickOn("#addBookButton");
+
+        robot.sleep(500);
+
+        verifyThat(".table-view", hasTableCell("Effective Java"));
+        verifyThat(".table-view", hasTableCell("Joshua Bloch"));
+    }
+
+    @Test
+    public void shouldDeleteBook(FxRobot robot) {
+        // Navigate to Book Management section
+        robot.clickOn("#btnManageBooks");
+
+        // Select the book in the TableView by clicking on the cell content
+        TableView<?> booktableView = robot.lookup(".table-view").queryAs(TableView.class);
+        int rowIndex = 0; // index of the row to select, adjust if needed
+        robot.interact(() -> booktableView.getSelectionModel().select(rowIndex));
+        robot.clickOn(".table-view .table-row-cell", MouseButton.PRIMARY);
+        robot.clickOn("#deleteBookButton");
+
+        // Verify that the book was removed from the table
+        verifyThat(".table-view", tableView -> !hasTableCell("Effective Java").matches(tableView));
+        verifyThat(".table-view", tableView -> !hasTableCell("Joshua Bloch").matches(tableView));
+    }
 }

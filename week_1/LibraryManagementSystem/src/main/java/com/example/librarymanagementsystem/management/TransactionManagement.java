@@ -57,14 +57,20 @@ public class TransactionManagement extends ManagementBase<Transaction> {
         // Form elements
         ComboBox<User> userComboBox = new ComboBox<>(userData);
         userComboBox.setPromptText("Select User");
+        userComboBox.setId("userComboBox");
         ComboBox<Book> bookComboBox = new ComboBox<>(bookData);
         bookComboBox.setPromptText("Select Book");
+        bookComboBox.setId("bookComboBox");
         DatePicker borrowDatePicker = new DatePicker();
         borrowDatePicker.setPromptText("Borrow Date");
+        borrowDatePicker.setId("borrowDatePicker");
         DatePicker returnDatePicker = new DatePicker();
         returnDatePicker.setPromptText("Return Date");
+        returnDatePicker.setId("returnDatePicker");
         Button borrowButton = new Button("Borrow Book");
+        borrowButton.setId("borrowButton");
         Button returnButton = new Button("Return Book");
+        returnButton.setId("returnButton");
 
         // Add elements to pane
         transactionManagementPane.getChildren().addAll(
